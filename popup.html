@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            width: 300px;
+            padding: 10px;
+        }
+        input, button {
+            margin: 5px 0;
+        }
+        #dateContainer {
+            margin-top: 10px;
+        }
+        input[type="date"] {
+            margin-right: 5px;
+        }
+        #statusText {
+            margin-top: 5px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="hashtagInput" placeholder="ハッシュタグを入力 (# なし)">
+    <div>
+        <button id="searchBtn">検索</button>
+        <button id="downloadBtn" disabled>画像をダウンロード</button>
+    </div>
+    <div id="dateContainer">
+        <input type="date" id="startDate">
+        <input type="date" id="endDate">
+    </div>
+    <div id="statusText"></div>
+    <script src="popup.js"></script>
+</body>
+</html> 

@@ -23,7 +23,20 @@
                 "https://x.com/*"
             ],
             "js": [
+                "lib/jszip.min.js",
+                "lib/FileSaver.min.js",
                 "content.js"
+            ]
+        }
+    ],
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "lib/*.js"
+            ],
+            "matches": [
+                "https://twitter.com/*",
+                "https://x.com/*"
             ]
         }
     ]

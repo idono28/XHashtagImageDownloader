@@ -1,0 +1,56 @@
+/* 時間入力フィールドのスタイル */
+.time-input-container {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    margin: 5px 0;
+}
+
+.time-input {
+    width: 40px;
+    text-align: center;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.time-separator {
+    font-weight: bold;
+    margin: 0 2px;
+}
+
+.time-unit {
+    font-size: 0.8rem;
+    color: #666;
+    margin-left: 2px;
+}
+
+#dateTimeContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.date-time-input {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+}
+
+.date-time-input label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.date-time-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+input[type="date"] {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+} 

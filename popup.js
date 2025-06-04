@@ -1,3 +1,36 @@
+// 多言語対応の初期化
+function initializeI18n() {
+    // data-i18n属性を持つ要素のテキストを更新
+    document.querySelectorAll('[data-i18n]').forEach(element => {
+        const messageKey = element.getAttribute('data-i18n');
+        const message = chrome.i18n.getMessage(messageKey);
+        if (message) {
+            element.textContent = message;
+        }
+    });
+    
+    // data-i18n-placeholder属性を持つ要素のプレースホルダーを更新
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
+        const messageKey = element.getAttribute('data-i18n-placeholder');
+        const message = chrome.i18n.getMessage(messageKey);
+        if (message) {
+            element.placeholder = message;
+        }
+    });
+}
+
+// ページ読み込み時に多言語対応を初期化
+document.addEventListener('DOMContentLoaded', function() {
+    initializeI18n();
+    document.getElementById('downloadBtn').disabled = true;
+    
+    // 現在の時間を取得して表示
+    const now = new Date();
+    const timeStr = now.toLocaleTimeString('ja-JP');
+    document.getElementById('statusText').innerHTML = 
+        `<div class="status-line">[${timeStr}] ${chrome.i18n.getMessage('pressSearchButton')}</div>`;
+});
+
 // 日付と時間の初期設定
 const today = new Date().toISOString().split('T')[0];
 document.getElementById('endDate').value = today;
@@ -57,7 +90,7 @@ document.querySelectorAll('.time-input').forEach(input => {
 document.getElementById('searchBtn').addEventListener('click', () => {
     const hashtag = document.getElementById('hashtagInput').value.trim();
     if (!hashtag) {
-        alert("ハッシュタグを入力してください");
+        alert(chrome.i18n.getMessage('enterHashtagAlert'));
         return;
     }
 
@@ -72,7 +105,7 @@ document.getElementById('searchBtn').addEventListener('click', () => {
     const endSecond = document.getElementById('endSecond').value.padStart(2, '0');
     
     if (!startDate || !endDate) {
-        alert("日付を指定してください");
+        alert(chrome.i18n.getMessage('enterDateAlert'));
         return;
     }
 
@@ -87,7 +120,7 @@ document.getElementById('searchBtn').addEventListener('click', () => {
     // 現在の時間を取得して表示
     const now = new Date();
     const timeStr = now.toLocaleTimeString('ja-JP');
-    statusText.innerHTML += `<div class="status-line">[${timeStr}] 検索中...</div>`;
+    statusText.innerHTML += `<div class="status-line">[${timeStr}] ${chrome.i18n.getMessage('searching')}</div>`;
 
     // 開始日時と終了日時をDateオブジェクトとして生成（JST）
     const startDateObj = new Date(startDate);
@@ -150,7 +183,7 @@ document.getElementById('searchBtn').addEventListener('click', () => {
                     // 現在の時間を取得して表示
                     const completedTime = new Date();
                     const completedTimeStr = completedTime.toLocaleTimeString('ja-JP');
-                    statusText.innerHTML += `<div class="status-line">[${completedTimeStr}] 検索完了！ダウンロードボタンが有効になりました</div>`;
+                    statusText.innerHTML += `<div class="status-line">[${completedTimeStr}] ${chrome.i18n.getMessage('searchComplete')}</div>`;
                     
                     // 自動スクロール（最新メッセージを表示）
                     statusText.scrollTop = statusText.scrollHeight;
@@ -166,12 +199,12 @@ document.getElementById('downloadBtn').addEventListener('click', async () => {
     const statusText = document.getElementById('statusText');
     
     downloadBtn.disabled = true;
-    statusText.textContent = "準備中...";
+    statusText.textContent = chrome.i18n.getMessage('preparing');
     
     // content scriptにダウンロード開始を通知
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
         if (!tabs || !tabs[0] || !tabs[0].id) {
-            statusText.textContent = "エラー: タブが見つかりません";
+            statusText.textContent = chrome.i18n.getMessage('tabNotFoundError');
             downloadBtn.disabled = false;
             return;
         }
@@ -233,21 +266,13 @@ chrome.runtime.onMessage.addListener((message, sender) => {
         if (message.message.includes('枚の画像をダウンロードしました') || 
             message.message.includes('画像をZIPファイル') ||
             message.message.includes('見つかりませんでした') ||
-            message.message.includes('エラーが発生しました')) {
+            message.message.includes('エラーが発生しました') ||
+            message.message.includes('images') ||
+            message.message.includes('found') ||
+            message.message.includes('error')) {
             document.getElementById('downloadBtn').disabled = false;
         }
     }
-});
-
-// 初期状態ではダウンロードボタンを無効化
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('downloadBtn').disabled = true;
-    
-    // 現在の時間を取得して表示
-    const now = new Date();
-    const timeStr = now.toLocaleTimeString('ja-JP');
-    document.getElementById('statusText').innerHTML = 
-        `<div class="status-line">[${timeStr}] 検索ボタンを押してから画像をダウンロードしてください</div>`;
 });
 
 // URLに基づいてダウンロードボタンの状態を設定
@@ -262,7 +287,7 @@ chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
         const now = new Date();
         const timeStr = now.toLocaleTimeString('ja-JP');
         document.getElementById('statusText').innerHTML = 
-            `<div class="status-line">[${timeStr}] ダウンロードボタンが有効です</div>`;
+            `<div class="status-line">[${timeStr}] ${chrome.i18n.getMessage('downloadButtonEnabled')}</div>`;
         
         // URLからハッシュタグと日付を抽出
         try {
@@ -316,7 +341,7 @@ chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
                 document.getElementById('endSecond').value = String(untilDate.getSeconds()).padStart(2, '0');
             }
         } catch (e) {
-            console.error("URLパラメータの解析に失敗しました:", e);
+            console.error(chrome.i18n.getMessage('urlParseError'), e);
         }
     } else {
         document.getElementById('downloadBtn').disabled = true;
@@ -325,6 +350,6 @@ chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
         const now = new Date();
         const timeStr = now.toLocaleTimeString('ja-JP');
         document.getElementById('statusText').innerHTML = 
-            `<div class="status-line">[${timeStr}] 検索ボタンを押してから画像をダウンロードしてください</div>`;
+            `<div class="status-line">[${timeStr}] ${chrome.i18n.getMessage('pressSearchButton')}</div>`;
     }
 }); 

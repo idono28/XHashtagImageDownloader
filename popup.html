@@ -106,16 +106,16 @@
     </style>
 </head>
 <body>
-    <h3>X Hashtag Image Downloader</h3>
-    <input type="text" id="hashtagInput" placeholder="ハッシュタグを入力 (# なし)">
+    <h3 data-i18n="appName">X Hashtag Image Downloader</h3>
+    <input type="text" id="hashtagInput" data-i18n-placeholder="enterHashtag" placeholder="Enter hashtag (without #)">
     <div id="buttonContainer">
-        <button id="searchBtn">検索</button>
-        <button id="downloadBtn" disabled>画像をダウンロード</button>
+        <button id="searchBtn" data-i18n="search">Search</button>
+        <button id="downloadBtn" disabled data-i18n="download">Download Images</button>
     </div>
     
     <div class="date-time-container">
         <div class="date-time-group">
-            <label>開始日時（JST）</label>
+            <label data-i18n="startDateTime">Start Date/Time (JST)</label>
             <input type="date" id="startDate" placeholder="開始日">
             <div class="time-input-container">
                 <input type="number" id="startHour" class="time-input" min="0" max="23" value="00" placeholder="時">
@@ -126,7 +126,7 @@
             </div>
         </div>
         <div class="date-time-group">
-            <label>終了日時（JST）</label>
+            <label data-i18n="endDateTime">End Date/Time (JST)</label>
             <input type="date" id="endDate" placeholder="終了日">
             <div class="time-input-container">
                 <input type="number" id="endHour" class="time-input" min="0" max="23" value="23" placeholder="時">

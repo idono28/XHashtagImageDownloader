@@ -4,6 +4,12 @@ async function downloadImages() {
         chrome.runtime.sendMessage({ type: 'updateStatus', message: message });
     }
 
+    // 多言語対応のメッセージを取得する関数
+    function getMessage(key, substitutions = []) {
+        const message = chrome.i18n.getMessage(key, substitutions);
+        return message || key; // メッセージが見つからない場合はキーを返す
+    }
+
     // スクロール処理
     async function scrollToPosition(position) {
         window.scrollTo(0, position);
@@ -25,7 +31,7 @@ async function downloadImages() {
         return name.replace(/[\\/:*?"<>|]/g, '_');
     }
 
-    updateStatus("画像を収集中...");
+    updateStatus(getMessage('collectingImages'));
     
     try {
         // 画像を収集するセット
@@ -267,11 +273,11 @@ async function downloadImages() {
             
             // 初期表示の投稿数を記録
             const initialPostCount = postImages.size;
-            updateStatus(`${initialPostCount}件の投稿を検出しました`);
+            updateStatus(getMessage('postsDetected', [initialPostCount]));
             
             // 初期表示の投稿がない場合は早期リターン
             if (initialPostCount === 0) {
-                updateStatus("投稿が見つかりませんでした。ハッシュタグを確認してください。");
+                updateStatus(getMessage('noPostsFound'));
                 return;
             }
             
@@ -297,7 +303,7 @@ async function downloadImages() {
                 // スクロール単位をさらに小さくして、より多くの回数でスクロール
                 const newScrollPosition = currentScrollY + window.innerHeight * 0.5;
                 
-                updateStatus(`画像を収集中... (${scrollCount}回目のスクロール、${postImages.size}件の投稿、${images.size}枚の画像を検出)`);
+                updateStatus(getMessage('scrollingScroll', [scrollCount, postImages.size, images.size]));
                 await scrollToPosition(newScrollPosition);
                 
                 // 各スクロール位置で画像を収集
@@ -319,7 +325,7 @@ async function downloadImages() {
                 } else {
                     noNewImagesCount++;
                     if (noNewImagesCount >= 5) { // 判定回数をさらに増やす
-                        updateStatus(`新しい投稿や画像が見つからないためスクロールを終了します (${scrollCount}回スクロールしました)`);
+                        updateStatus(getMessage('noNewImages', [scrollCount]));
                         shouldStop = true;
                     }
                 }
@@ -328,7 +334,7 @@ async function downloadImages() {
                 if (Math.abs(currentHeight - previousHeight) < 10) { // 誤差を許容
                     noHeightChangeCount++;
                     if (noHeightChangeCount >= 5) { // 判定回数をさらに増やす
-                        updateStatus(`ページの高さが変化しないためスクロールを終了します (${scrollCount}回スクロールしました)`);
+                        updateStatus(getMessage('noHeightChange', [scrollCount]));
                         shouldStop = true;
                     }
                 } else {
@@ -338,7 +344,7 @@ async function downloadImages() {
                 
                 // 3. ページの最下部に到達
                 if (window.innerHeight + window.scrollY >= getPageHeight() - 20) { // マージンをさらに小さくする
-                    updateStatus(`ページ最下部に到達したためスクロールを終了します (${scrollCount}回スクロールしました)`);
+                    updateStatus(getMessage('bottomReached', [scrollCount]));
                     // 最下部に到達した場合は、少し待ってから再度画像を収集（最後の投稿を確実に取得するため）
                     await new Promise(resolve => setTimeout(resolve, 3000)); // 待機時間を増やす
                     collectCurrentImages();
@@ -354,11 +360,11 @@ async function downloadImages() {
             }
             
             if (scrollCount >= maxScrolls) {
-                updateStatus(`最大スクロール回数(${maxScrolls}回)に達しました`);
+                updateStatus(getMessage('maxScrolls', [maxScrolls]));
             }
             
             // 最後に最下部までスクロールして、最後の投稿を確実に取得
-            updateStatus("最下部まで移動して最後の投稿を確認中...");
+            updateStatus(getMessage('checkingLastPosts'));
             await scrollToPosition(getPageHeight() - window.innerHeight);
             await new Promise(resolve => setTimeout(resolve, 3000)); // 待機時間を増やす
             collectCurrentImages();
@@ -584,7 +590,7 @@ async function downloadImages() {
                 const currentScrollY = window.scrollY;
                 const newPosition = currentScrollY + window.innerHeight * 0.8;
                 
-                updateStatus(`メタデータ収集中... (${postMetadata.size}/${postImages.size}件の投稿)`);
+                updateStatus(getMessage('collectingMetadata', [postMetadata.size, postImages.size]));
                 await scrollToPosition(newPosition);
                 await collectPostMetadata();
                 
@@ -602,7 +608,7 @@ async function downloadImages() {
         await collectImagesWhileScrolling();
 
         if (images.size === 0) {
-            updateStatus("画像が見つかりませんでした");
+            updateStatus(getMessage('noImagesFound'));
             return;
         }
         
@@ -621,7 +627,7 @@ async function downloadImages() {
             // JSZipが使えるかチェック
             if (typeof JSZip !== 'undefined') {
                 // ZIP保存用のフォルダを作成
-                updateStatus(`${postImages.size}件の投稿から${images.size}枚の画像をZIPに圧縮中...`);
+                updateStatus(getMessage('compressingImages', [postImages.size, images.size]));
                 
                 // 日付を取得してZIPファイル名に使用
                 const now = new Date();
@@ -686,12 +692,12 @@ async function downloadImages() {
                             
                             // 進捗表示
                             if (processedCount % 5 === 0 || processedCount === images.size) {
-                                updateStatus(`ZIPファイル作成中... (${processedCount}/${images.size}枚、${Array.from(postMetadata.keys()).indexOf(tweetId) + 1}/${postMetadata.size}件目の投稿)`);
+                                updateStatus(getMessage('downloadingProgress', [processedCount, images.size, Array.from(postMetadata.keys()).indexOf(tweetId) + 1, postMetadata.size]));
                             }
                         } catch (error) {
                             console.error("画像の取得に失敗しました:", error);
                             processedCount++;
-                            updateStatus(`ZIPファイル作成中... (${processedCount}/${images.size}枚) - 一部失敗`);
+                            updateStatus(getMessage('downloadingProgressFailed', [processedCount, images.size]));
                         }
                     }
                     
@@ -720,7 +726,7 @@ async function downloadImages() {
                 zip.file(csvFileName, csvContent);
                 
                 // ZIPファイルを生成してダウンロード
-                updateStatus("ZIPファイルを生成中...");
+                updateStatus(getMessage('creatingZip'));
                 const content = await zip.generateAsync({
                     type: "blob",
                     compression: "DEFLATE",
@@ -733,14 +739,14 @@ async function downloadImages() {
                 // 処理した投稿数を計算（実際に画像があった投稿数）
                 const processedPostCount = Array.from(postImages.entries()).filter(([_, urls]) => urls.size > 0).length;
 
-                updateStatus(`${processedCount}枚の画像と${processedPostCount}件の投稿データをZIPファイル「${zipFileName}」でダウンロードしました`);
+                updateStatus(getMessage('zipDownloadComplete', [processedCount, processedPostCount, zipFileName]));
                 return;
             } else {
                 throw new Error("JSZipライブラリが利用できません");
             }
         } catch (error) {
             console.error("ZIPでのダウンロードに失敗しました。個別ダウンロードに切り替えます:", error);
-            updateStatus("ZIPでのダウンロードに失敗しました。個別ダウンロードに切り替えます...");
+            updateStatus(getMessage('zipFailed'));
             
             // 個別ダウンロード用の処理に進む
         }
@@ -759,7 +765,7 @@ async function downloadImages() {
             imagesTotal += imageUrls.size;
         }
 
-        updateStatus(`${postImages.size}件の投稿から${imagesTotal}枚の画像をダウンロード中...`);
+        updateStatus(getMessage('downloadingImages', [postImages.size, imagesTotal]));
 
         // CSV作成のための情報を格納する配列
         const csvData = [
@@ -825,7 +831,7 @@ async function downloadImages() {
                     
                     // 進捗表示（5枚ごと）
                     if (downloadCount % 5 === 0 || downloadCount === imagesTotal) {
-                        updateStatus(`ダウンロード中... (${downloadCount}/${imagesTotal}枚、${Array.from(postImages.keys()).indexOf(tweetId) + 1}/${postImages.size}件目の投稿)`);
+                        updateStatus(getMessage('downloadingProgress', [downloadCount, imagesTotal, Array.from(postImages.keys()).indexOf(tweetId) + 1, postImages.size]));
                     }
                     
                     // ダウンロード間隔を空ける（ブラウザの制限回避）
@@ -833,7 +839,7 @@ async function downloadImages() {
                 } catch (error) {
                     console.error("画像のダウンロードに失敗しました:", error, imgSrc);
                     downloadCount++;
-                    updateStatus(`ダウンロード中... (${downloadCount}/${imagesTotal}枚) - 一部失敗`);
+                    updateStatus(getMessage('downloadingProgressFailed', [downloadCount, imagesTotal]));
                 }
             }
             
@@ -873,14 +879,14 @@ async function downloadImages() {
             // 処理した投稿数を計算（実際に画像があった投稿数）
             const processedPostCount = Array.from(postImages.entries()).filter(([_, urls]) => urls.size > 0).length;
 
-            updateStatus(`${downloadCount}枚の画像を個別にダウンロードしました (全${processedPostCount}件の投稿から) CSVファイル「${csvFileName}」も保存されました`);
+            updateStatus(getMessage('individualDownloadComplete', [downloadCount, processedPostCount, csvFileName]));
         } catch (error) {
             console.error("CSVファイルの作成に失敗しました:", error);
-            updateStatus(`${downloadCount}枚の画像を個別にダウンロードしました (全${postImages.size}件の投稿から) ※CSVファイルの作成に失敗しました`);
+            updateStatus(getMessage('csvFailed', [downloadCount, postImages.size]));
         }
     } catch (error) {
         console.error("処理中にエラーが発生しました:", error);
-        updateStatus(`エラーが発生しました: ${error.message}`);
+        updateStatus(getMessage('error', [error.message]));
     }
 }
 
@@ -895,7 +901,7 @@ if (message.action === 'downloadImages') {
         console.error("画像ダウンロード中にエラーが発生しました:", err);
         chrome.runtime.sendMessage({ 
             type: 'updateStatus', 
-            message: "エラーが発生しました: " + err.message 
+            message: chrome.i18n.getMessage('error', [err.message]) || `エラーが発生しました: ${err.message}`
         });
     });
     // リスナーはtrueを返して非同期処理を継続

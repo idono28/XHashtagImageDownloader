@@ -1,0 +1,310 @@
+{
+  "appName": {
+    "message": "X Hashtag Image Downloader",
+    "description": "Application name"
+  },
+  "appDescription": {
+    "message": "Download images from specified hashtag posts",
+    "description": "Application description"
+  },
+  "enterHashtag": {
+    "message": "Enter hashtag (without #)",
+    "description": "Hashtag input placeholder"
+  },
+  "search": {
+    "message": "Search",
+    "description": "Search button text"
+  },
+  "download": {
+    "message": "Download Images",
+    "description": "Download button text"
+  },
+  "startDateTime": {
+    "message": "Start Date/Time (JST)",
+    "description": "Start date/time label"
+  },
+  "endDateTime": {
+    "message": "End Date/Time (JST)",
+    "description": "End date/time label"
+  },
+  "enterHashtagAlert": {
+    "message": "Please enter a hashtag",
+    "description": "Alert when hashtag is not entered"
+  },
+  "enterDateAlert": {
+    "message": "Please specify dates",
+    "description": "Alert when dates are not specified"
+  },
+  "searching": {
+    "message": "Searching...",
+    "description": "Searching status"
+  },
+  "searchComplete": {
+    "message": "Search complete! Download button is now enabled",
+    "description": "Search completion message"
+  },
+  "preparing": {
+    "message": "Preparing...",
+    "description": "Download preparation message"
+  },
+  "tabNotFoundError": {
+    "message": "Error: Tab not found",
+    "description": "Tab not found error"
+  },
+  "downloadButtonEnabled": {
+    "message": "Download button is enabled",
+    "description": "Download button enabled message"
+  },
+  "pressSearchButton": {
+    "message": "Please press the search button before downloading images",
+    "description": "Message before search"
+  },
+  "urlParseError": {
+    "message": "Failed to parse URL parameters",
+    "description": "URL parsing error"
+  },
+  "collectingImages": {
+    "message": "Collecting images...",
+    "description": "Image collection message"
+  },
+  "noPostsFound": {
+    "message": "No posts found. Please check the hashtag.",
+    "description": "No posts found message"
+  },
+  "postsDetected": {
+    "message": "Detected $COUNT$ posts",
+    "description": "Posts detected message",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "10"
+      }
+    }
+  },
+  "scrollingScroll": {
+    "message": "Scroll #$SCROLL$: detected $POSTS$ posts, $IMAGES$ images",
+    "description": "Scrolling message",
+    "placeholders": {
+      "scroll": {
+        "content": "$1",
+        "example": "5"
+      },
+      "posts": {
+        "content": "$2",
+        "example": "10"
+      },
+      "images": {
+        "content": "$3",
+        "example": "25"
+      }
+    }
+  },
+  "noNewImages": {
+    "message": "No new posts or images found, ending scroll (scrolled $SCROLL$ times)",
+    "description": "No new images message",
+    "placeholders": {
+      "scroll": {
+        "content": "$1",
+        "example": "10"
+      }
+    }
+  },
+  "noHeightChange": {
+    "message": "Page height unchanged, ending scroll (scrolled $SCROLL$ times)",
+    "description": "No height change message",
+    "placeholders": {
+      "scroll": {
+        "content": "$1",
+        "example": "10"
+      }
+    }
+  },
+  "bottomReached": {
+    "message": "Reached bottom of page, ending scroll (scrolled $SCROLL$ times)",
+    "description": "Bottom reached message",
+    "placeholders": {
+      "scroll": {
+        "content": "$1",
+        "example": "10"
+      }
+    }
+  },
+  "maxScrolls": {
+    "message": "Reached maximum scroll count ($MAX$ times)",
+    "description": "Maximum scrolls reached message",
+    "placeholders": {
+      "max": {
+        "content": "$1",
+        "example": "50"
+      }
+    }
+  },
+  "checkingLastPosts": {
+    "message": "Moving to bottom to check last posts...",
+    "description": "Checking last posts message"
+  },
+  "collectingMetadata": {
+    "message": "Collecting metadata... ($CURRENT$/$TOTAL$ posts)",
+    "description": "Metadata collection message",
+    "placeholders": {
+      "current": {
+        "content": "$1",
+        "example": "5"
+      },
+      "total": {
+        "content": "$2",
+        "example": "10"
+      }
+    }
+  },
+  "missingMetadata": {
+    "message": "Missing metadata. Additional collection... ($CURRENT$/$TOTAL$ posts)",
+    "description": "Missing metadata message",
+    "placeholders": {
+      "current": {
+        "content": "$1",
+        "example": "5"
+      },
+      "total": {
+        "content": "$2",
+        "example": "10"
+      }
+    }
+  },
+  "noImagesFound": {
+    "message": "No images found",
+    "description": "No images found message"
+  },
+  "compressingImages": {
+    "message": "Compressing $IMAGES$ images from $POSTS$ posts into ZIP...",
+    "description": "ZIP compression message",
+    "placeholders": {
+      "posts": {
+        "content": "$1",
+        "example": "10"
+      },
+      "images": {
+        "content": "$2",
+        "example": "25"
+      }
+    }
+  },
+  "creatingZip": {
+    "message": "Creating ZIP file...",
+    "description": "ZIP creation message"
+  },
+  "zipDownloadComplete": {
+    "message": "Downloaded $IMAGES$ images and $POSTS$ post data in ZIP file \"$FILENAME$\"",
+    "description": "ZIP download complete message",
+    "placeholders": {
+      "images": {
+        "content": "$1",
+        "example": "25"
+      },
+      "posts": {
+        "content": "$2",
+        "example": "10"
+      },
+      "filename": {
+        "content": "$3",
+        "example": "hashtag_images.zip"
+      }
+    }
+  },
+  "zipFailed": {
+    "message": "ZIP download failed. Switching to individual download...",
+    "description": "ZIP failed message"
+  },
+  "downloadingImages": {
+    "message": "Downloading $IMAGES$ images from $POSTS$ posts...",
+    "description": "Individual download message",
+    "placeholders": {
+      "posts": {
+        "content": "$1",
+        "example": "10"
+      },
+      "images": {
+        "content": "$2",
+        "example": "25"
+      }
+    }
+  },
+  "downloadingProgress": {
+    "message": "Downloading... ($CURRENT$/$TOTAL$ images, post $POST_CURRENT$/$POST_TOTAL$)",
+    "description": "Download progress message",
+    "placeholders": {
+      "current": {
+        "content": "$1",
+        "example": "5"
+      },
+      "total": {
+        "content": "$2",
+        "example": "25"
+      },
+      "post_current": {
+        "content": "$3",
+        "example": "2"
+      },
+      "post_total": {
+        "content": "$4",
+        "example": "10"
+      }
+    }
+  },
+  "downloadingProgressFailed": {
+    "message": "Downloading... ($CURRENT$/$TOTAL$ images) - Some failed",
+    "description": "Download progress with failures message",
+    "placeholders": {
+      "current": {
+        "content": "$1",
+        "example": "5"
+      },
+      "total": {
+        "content": "$2",
+        "example": "25"
+      }
+    }
+  },
+  "individualDownloadComplete": {
+    "message": "Downloaded $IMAGES$ images individually (from $POSTS$ posts total). CSV file \"$FILENAME$\" was also saved",
+    "description": "Individual download complete message",
+    "placeholders": {
+      "images": {
+        "content": "$1",
+        "example": "25"
+      },
+      "posts": {
+        "content": "$2",
+        "example": "10"
+      },
+      "filename": {
+        "content": "$3",
+        "example": "hashtag_list.csv"
+      }
+    }
+  },
+  "csvFailed": {
+    "message": "Downloaded $IMAGES$ images individually (from $POSTS$ posts total) ※CSV file creation failed",
+    "description": "CSV creation failed message",
+    "placeholders": {
+      "images": {
+        "content": "$1",
+        "example": "25"
+      },
+      "posts": {
+        "content": "$2",
+        "example": "10"
+      }
+    }
+  },
+  "error": {
+    "message": "An error occurred: $ERROR$",
+    "description": "Error message",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "Network error"
+      }
+    }
+  }
+} 

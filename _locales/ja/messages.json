@@ -1,0 +1,310 @@
+{
+  "appName": {
+    "message": "X ハッシュタグ画像ダウンローダー",
+    "description": "アプリケーション名"
+  },
+  "appDescription": {
+    "message": "指定したハッシュタグの画像をダウンロードします",
+    "description": "アプリケーションの説明"
+  },
+  "enterHashtag": {
+    "message": "ハッシュタグを入力 (# なし)",
+    "description": "ハッシュタグ入力欄のプレースホルダー"
+  },
+  "search": {
+    "message": "検索",
+    "description": "検索ボタンのテキスト"
+  },
+  "download": {
+    "message": "画像をダウンロード",
+    "description": "ダウンロードボタンのテキスト"
+  },
+  "startDateTime": {
+    "message": "開始日時（JST）",
+    "description": "開始日時ラベル"
+  },
+  "endDateTime": {
+    "message": "終了日時（JST）",
+    "description": "終了日時ラベル"
+  },
+  "enterHashtagAlert": {
+    "message": "ハッシュタグを入力してください",
+    "description": "ハッシュタグ未入力時のアラート"
+  },
+  "enterDateAlert": {
+    "message": "日付を指定してください",
+    "description": "日付未指定時のアラート"
+  },
+  "searching": {
+    "message": "検索中...",
+    "description": "検索中のステータス"
+  },
+  "searchComplete": {
+    "message": "検索完了！ダウンロードボタンが有効になりました",
+    "description": "検索完了時のメッセージ"
+  },
+  "preparing": {
+    "message": "準備中...",
+    "description": "ダウンロード準備中のメッセージ"
+  },
+  "tabNotFoundError": {
+    "message": "エラー: タブが見つかりません",
+    "description": "タブが見つからない時のエラー"
+  },
+  "downloadButtonEnabled": {
+    "message": "ダウンロードボタンが有効です",
+    "description": "ダウンロードボタンが有効な時のメッセージ"
+  },
+  "pressSearchButton": {
+    "message": "検索ボタンを押してから画像をダウンロードしてください",
+    "description": "検索前のメッセージ"
+  },
+  "urlParseError": {
+    "message": "URLパラメータの解析に失敗しました",
+    "description": "URL解析エラー"
+  },
+  "collectingImages": {
+    "message": "画像を収集中...",
+    "description": "画像収集中のメッセージ"
+  },
+  "noPostsFound": {
+    "message": "投稿が見つかりませんでした。ハッシュタグを確認してください。",
+    "description": "投稿が見つからない時のメッセージ"
+  },
+  "postsDetected": {
+    "message": "$COUNT$件の投稿を検出しました",
+    "description": "投稿検出時のメッセージ",
+    "placeholders": {
+      "count": {
+        "content": "$1",
+        "example": "10"
+      }
+    }
+  },
+  "scrollingScroll": {
+    "message": "$SCROLL$回目のスクロール、$POSTS$件の投稿、$IMAGES$枚の画像を検出",
+    "description": "スクロール中のメッセージ",
+    "placeholders": {
+      "scroll": {
+        "content": "$1",
+        "example": "5"
+      },
+      "posts": {
+        "content": "$2",
+        "example": "10"
+      },
+      "images": {
+        "content": "$3",
+        "example": "25"
+      }
+    }
+  },
+  "noNewImages": {
+    "message": "新しい投稿や画像が見つからないためスクロールを終了します ($SCROLL$回スクロールしました)",
+    "description": "新しい画像が見つからない時のメッセージ",
+    "placeholders": {
+      "scroll": {
+        "content": "$1",
+        "example": "10"
+      }
+    }
+  },
+  "noHeightChange": {
+    "message": "ページの高さが変化しないためスクロールを終了します ($SCROLL$回スクロールしました)",
+    "description": "ページ高さが変わらない時のメッセージ",
+    "placeholders": {
+      "scroll": {
+        "content": "$1",
+        "example": "10"
+      }
+    }
+  },
+  "bottomReached": {
+    "message": "ページ最下部に到達したためスクロールを終了します ($SCROLL$回スクロールしました)",
+    "description": "最下部到達時のメッセージ",
+    "placeholders": {
+      "scroll": {
+        "content": "$1",
+        "example": "10"
+      }
+    }
+  },
+  "maxScrolls": {
+    "message": "最大スクロール回数($MAX$回)に達しました",
+    "description": "最大スクロール回数到達時のメッセージ",
+    "placeholders": {
+      "max": {
+        "content": "$1",
+        "example": "50"
+      }
+    }
+  },
+  "checkingLastPosts": {
+    "message": "最下部まで移動して最後の投稿を確認中...",
+    "description": "最後の投稿確認中のメッセージ"
+  },
+  "collectingMetadata": {
+    "message": "メタデータ収集中... ($CURRENT$/$TOTAL$件の投稿)",
+    "description": "メタデータ収集中のメッセージ",
+    "placeholders": {
+      "current": {
+        "content": "$1",
+        "example": "5"
+      },
+      "total": {
+        "content": "$2",
+        "example": "10"
+      }
+    }
+  },
+  "missingMetadata": {
+    "message": "メタデータが不足しています。追加収集中... ($CURRENT$/$TOTAL$件の投稿)",
+    "description": "メタデータ不足時のメッセージ",
+    "placeholders": {
+      "current": {
+        "content": "$1",
+        "example": "5"
+      },
+      "total": {
+        "content": "$2",
+        "example": "10"
+      }
+    }
+  },
+  "noImagesFound": {
+    "message": "画像が見つかりませんでした",
+    "description": "画像が見つからない時のメッセージ"
+  },
+  "compressingImages": {
+    "message": "$POSTS$件の投稿から$IMAGES$枚の画像をZIPに圧縮中...",
+    "description": "ZIP圧縮中のメッセージ",
+    "placeholders": {
+      "posts": {
+        "content": "$1",
+        "example": "10"
+      },
+      "images": {
+        "content": "$2",
+        "example": "25"
+      }
+    }
+  },
+  "creatingZip": {
+    "message": "ZIPファイルを生成中...",
+    "description": "ZIP生成中のメッセージ"
+  },
+  "zipDownloadComplete": {
+    "message": "$IMAGES$枚の画像と$POSTS$件の投稿データをZIPファイル「$FILENAME$」でダウンロードしました",
+    "description": "ZIPダウンロード完了時のメッセージ",
+    "placeholders": {
+      "images": {
+        "content": "$1",
+        "example": "25"
+      },
+      "posts": {
+        "content": "$2",
+        "example": "10"
+      },
+      "filename": {
+        "content": "$3",
+        "example": "hashtag_images.zip"
+      }
+    }
+  },
+  "zipFailed": {
+    "message": "ZIPでのダウンロードに失敗しました。個別ダウンロードに切り替えます...",
+    "description": "ZIP失敗時のメッセージ"
+  },
+  "downloadingImages": {
+    "message": "$POSTS$件の投稿から$IMAGES$枚の画像をダウンロード中...",
+    "description": "個別ダウンロード中のメッセージ",
+    "placeholders": {
+      "posts": {
+        "content": "$1",
+        "example": "10"
+      },
+      "images": {
+        "content": "$2",
+        "example": "25"
+      }
+    }
+  },
+  "downloadingProgress": {
+    "message": "ダウンロード中... ($CURRENT$/$TOTAL$枚、$POST_CURRENT$/$POST_TOTAL$件目の投稿)",
+    "description": "ダウンロード進捗メッセージ",
+    "placeholders": {
+      "current": {
+        "content": "$1",
+        "example": "5"
+      },
+      "total": {
+        "content": "$2",
+        "example": "25"
+      },
+      "post_current": {
+        "content": "$3",
+        "example": "2"
+      },
+      "post_total": {
+        "content": "$4",
+        "example": "10"
+      }
+    }
+  },
+  "downloadingProgressFailed": {
+    "message": "ダウンロード中... ($CURRENT$/$TOTAL$枚) - 一部失敗",
+    "description": "ダウンロード進捗（失敗あり）メッセージ",
+    "placeholders": {
+      "current": {
+        "content": "$1",
+        "example": "5"
+      },
+      "total": {
+        "content": "$2",
+        "example": "25"
+      }
+    }
+  },
+  "individualDownloadComplete": {
+    "message": "$IMAGES$枚の画像を個別にダウンロードしました (全$POSTS$件の投稿から) CSVファイル「$FILENAME$」も保存されました",
+    "description": "個別ダウンロード完了時のメッセージ",
+    "placeholders": {
+      "images": {
+        "content": "$1",
+        "example": "25"
+      },
+      "posts": {
+        "content": "$2",
+        "example": "10"
+      },
+      "filename": {
+        "content": "$3",
+        "example": "hashtag_list.csv"
+      }
+    }
+  },
+  "csvFailed": {
+    "message": "$IMAGES$枚の画像を個別にダウンロードしました (全$POSTS$件の投稿から) ※CSVファイルの作成に失敗しました",
+    "description": "CSV作成失敗時のメッセージ",
+    "placeholders": {
+      "images": {
+        "content": "$1",
+        "example": "25"
+      },
+      "posts": {
+        "content": "$2",
+        "example": "10"
+      }
+    }
+  },
+  "error": {
+    "message": "エラーが発生しました: $ERROR$",
+    "description": "エラーメッセージ",
+    "placeholders": {
+      "error": {
+        "content": "$1",
+        "example": "Network error"
+      }
+    }
+  }
+} 
